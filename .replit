@@ -1,2 +1,5 @@
 language = "bash"
-run = "run.sh"
+
+run = ["bash", "run.sh"]
+
+entrypoint = "run.sh"

@@ -37,6 +37,10 @@ run_ruby(){
     ruby $1
 }
 
+run_golang(){
+    go run $1
+}
+
 run_cpp(){
     g++ $1 && ./a.out
 }
@@ -53,5 +57,6 @@ elif [[ "$filename" == *".js" ]]; then
     run_node $filename
 elif [[ "$filename" == *".rb" ]]; then
     run_ruby $filename
+elif [[ "$filename" == *".go" ]]; then
+    run_golang $filename
 fi
-

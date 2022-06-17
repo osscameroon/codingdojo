@@ -45,18 +45,23 @@ run_cpp(){
     g++ $1 && ./a.out
 }
 
-if [[ "$filename" == *".py" ]]; then
-    run_python $filename
-elif [[ "$filename" == *".java" ]]; then
-    run_java $filename
-elif [[ "$filename" == *".cpp" ]]; then
-    run_cpp $filename
-elif [[ "$filename" == *".c" ]]; then
-    run_c $filename
-elif [[ "$filename" == *".js" ]]; then
-    run_node $filename
-elif [[ "$filename" == *".rb" ]]; then
-    run_ruby $filename
-elif [[ "$filename" == *".go" ]]; then
-    run_golang $filename
-fi
+main(){
+    time \
+    if [[ "$filename" == *".py" ]]; then
+        run_python $filename
+    elif [[ "$filename" == *".java" ]]; then
+        run_java $filename
+    elif [[ "$filename" == *".cpp" ]]; then
+        run_cpp $filename
+    elif [[ "$filename" == *".c" ]]; then
+        run_c $filename
+    elif [[ "$filename" == *".js" ]]; then
+        run_node $filename
+    elif [[ "$filename" == *".rb" ]]; then
+        run_ruby $filename
+    elif [[ "$filename" == *".go" ]]; then
+        run_golang $filename
+    fi
+}
+
+main

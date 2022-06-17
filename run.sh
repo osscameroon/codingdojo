@@ -29,6 +29,14 @@ run_c(){
     gcc $1 && ./a.out
 }
 
+run_node(){
+    node $1
+}
+
+run_ruby(){
+    ruby $1
+}
+
 run_cpp(){
     g++ $1 && ./a.out
 }
@@ -41,4 +49,9 @@ elif [[ "$filename" == *".cpp" ]]; then
     run_cpp $filename
 elif [[ "$filename" == *".c" ]]; then
     run_c $filename
+elif [[ "$filename" == *".js" ]]; then
+    run_node $filename
+elif [[ "$filename" == *".rb" ]]; then
+    run_ruby $filename
 fi
+

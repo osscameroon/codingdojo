@@ -1,3 +1,5 @@
+#/bin/bash
+
 # ask the team to run A or B? put in a variable $team
 # get the lower version of $team
 # get the filename starting with 'team_$team'
@@ -6,19 +8,60 @@
 
 echo "Please enter your team name"
 read -r team
-#echo "Please enter your file extension(py / java)" 
+#echo "Please enter your file extension(py / java)"
 #read -r extension
 
-extension="py"
-filename="team_$team.$extension"
+filename=$(ls -1 | grep "team_$team")
+extension=$(echo $filename | cut -d "." -f 2)
 
+echo "[-] filename:  $filename"
+echo "[-] extexion :  $extension"
 
-# Qu'est-ce qu'on tente de tester ici ?
-echo "Filename: $filename"
-if [[ "$filename" == *".py" ]]; then
-#  echo "I am py"
-  python $filename;
-elif [[ "$filename" == *".java" ]]; then
-#  echo "I am java"
-  java $filename && java $team.out;
-fi
+run_python(){
+    python $1
+}
+
+run_java(){
+    java $1 && java $team.out
+}
+
+run_c(){
+    gcc $1 && ./a.out
+}
+
+run_node(){
+    node $1
+}
+
+run_ruby(){
+    ruby $1
+}
+
+run_golang(){
+    go run $1
+}
+
+run_cpp(){
+    g++ $1 && ./a.out
+}
+
+main(){
+    time \
+    if [[ "$filename" == *".py" ]]; then
+        run_python $filename
+    elif [[ "$filename" == *".java" ]]; then
+        run_java $filename
+    elif [[ "$filename" == *".cpp" ]]; then
+        run_cpp $filename
+    elif [[ "$filename" == *".c" ]]; then
+        run_c $filename
+    elif [[ "$filename" == *".js" ]]; then
+        run_node $filename
+    elif [[ "$filename" == *".rb" ]]; then
+        run_ruby $filename
+    elif [[ "$filename" == *".go" ]]; then
+        run_golang $filename
+    fi
+}
+
+main
